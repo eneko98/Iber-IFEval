@@ -1,4 +1,8 @@
-absl-py
-langdetect
-nltk
-immutabledict
+absl-py~=2.3.1
+langdetect~=1.0.9
+nltk~=3.9.2
+immutabledict~=4.2.2
+pandas~=2.3.3
+pydantic~=2.12.1
+openai~=2.3.0
+tqdm~=4.67.1
