@@ -1,0 +1,82 @@
+Generating strict...
+Accuracy: 0.4510166358595194
+Generated: /home/nperez/Development/google-research/results/seed0/ca/llama-3.1-8b-instruct/strict.jsonl
+================================================================
+/home/nperez/Development/google-research/results/seed0/ca/llama-3.1-8b-instruct/strict.jsonl Accuracy Scores:
+prompt-level: 0.4510166358595194
+instruction-level: 0.5404732254047323
+
+change_case 0.15730337078651685
+combination 0.5384615384615384
+detectable_content 0.6037735849056604
+detectable_format 0.7070063694267515
+keywords 0.7300613496932515
+length_constraints 0.46853146853146854
+punctuation 0.3333333333333333
+startend 0.5074626865671642
+
+change_case:capital_word_frequency 0.56
+change_case:english_capital 0.0
+change_case:english_lowercase 0.0
+combination:repeat_prompt 0.43902439024390244
+combination:two_responses 0.7083333333333334
+detectable_content:number_placeholders 0.5925925925925926
+detectable_content:postscript 0.6153846153846154
+detectable_format:constrained_response 0.9
+detectable_format:json_format 0.17647058823529413
+detectable_format:multiple_sections 0.7857142857142857
+detectable_format:number_bullet_lists 0.41935483870967744
+detectable_format:number_highlighted_sections 0.8333333333333334
+detectable_format:title 0.9459459459459459
+keywords:existence 0.7692307692307693
+keywords:forbidden_words 0.8163265306122449
+keywords:frequency 0.7142857142857143
+keywords:letter_frequency 0.5757575757575758
+length_constraints:nth_paragraph_first_word 0.4166666666666667
+length_constraints:number_paragraphs 0.5185185185185185
+length_constraints:number_sentences 0.5384615384615384
+length_constraints:number_words 0.38461538461538464
+punctuation:no_comma 0.3333333333333333
+startend:end_checker 0.5769230769230769
+startend:quotation 0.4634146341463415
+Generating loose...
+Accuracy: 0.4879852125693161
+Generated: /home/nperez/Development/google-research/results/seed0/ca/llama-3.1-8b-instruct/loose.jsonl
+================================================================
+/home/nperez/Development/google-research/results/seed0/ca/llama-3.1-8b-instruct/loose.jsonl Accuracy Scores:
+prompt-level: 0.4879852125693161
+instruction-level: 0.572851805728518
+
+change_case 0.16853932584269662
+combination 0.5692307692307692
+detectable_content 0.6037735849056604
+detectable_format 0.732484076433121
+keywords 0.7361963190184049
+length_constraints 0.5454545454545454
+punctuation 0.3939393939393939
+startend 0.5522388059701493
+
+change_case:capital_word_frequency 0.56
+change_case:english_capital 0.04
+change_case:english_lowercase 0.0
+combination:repeat_prompt 0.4878048780487805
+combination:two_responses 0.7083333333333334
+detectable_content:number_placeholders 0.5925925925925926
+detectable_content:postscript 0.6153846153846154
+detectable_format:constrained_response 0.9
+detectable_format:json_format 0.35294117647058826
+detectable_format:multiple_sections 0.7857142857142857
+detectable_format:number_bullet_lists 0.45161290322580644
+detectable_format:number_highlighted_sections 0.8333333333333334
+detectable_format:title 0.9459459459459459
+keywords:existence 0.7692307692307693
+keywords:forbidden_words 0.8367346938775511
+keywords:frequency 0.7142857142857143
+keywords:letter_frequency 0.5757575757575758
+length_constraints:nth_paragraph_first_word 0.5833333333333334
+length_constraints:number_paragraphs 0.5925925925925926
+length_constraints:number_sentences 0.5769230769230769
+length_constraints:number_words 0.4807692307692308
+punctuation:no_comma 0.3939393939393939
+startend:end_checker 0.5769230769230769
+startend:quotation 0.5365853658536586

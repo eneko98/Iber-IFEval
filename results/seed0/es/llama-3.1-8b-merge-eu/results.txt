@@ -1,0 +1,82 @@
+Generating strict...
+Accuracy: 0.2975970425138632
+Generated: /home/nperez/Development/google-research/results/seed0/es/llama-3.1-8b-merge-eu/strict.jsonl
+================================================================
+/home/nperez/Development/google-research/results/seed0/es/llama-3.1-8b-merge-eu/strict.jsonl Accuracy Scores:
+prompt-level: 0.2975970425138632
+instruction-level: 0.40473225404732255
+
+change_case 0.15730337078651685
+combination 0.46153846153846156
+detectable_content 0.7358490566037735
+detectable_format 0.6242038216560509
+keywords 0.5828220858895705
+length_constraints 0.2937062937062937
+punctuation 0.10606060606060606
+startend 0.0
+
+change_case:capital_word_frequency 0.48
+change_case:english_capital 0.08
+change_case:english_lowercase 0.0
+combination:repeat_prompt 0.5121951219512195
+combination:two_responses 0.375
+detectable_content:number_placeholders 0.5925925925925926
+detectable_content:postscript 0.8846153846153846
+detectable_format:constrained_response 1.0
+detectable_format:json_format 0.0
+detectable_format:multiple_sections 0.7857142857142857
+detectable_format:number_bullet_lists 0.16129032258064516
+detectable_format:number_highlighted_sections 0.7708333333333334
+detectable_format:title 0.9459459459459459
+keywords:existence 0.7435897435897436
+keywords:forbidden_words 0.40816326530612246
+keywords:frequency 0.6190476190476191
+keywords:letter_frequency 0.6060606060606061
+length_constraints:nth_paragraph_first_word 0.0
+length_constraints:number_paragraphs 0.2222222222222222
+length_constraints:number_sentences 0.36538461538461536
+length_constraints:number_words 0.3269230769230769
+punctuation:no_comma 0.10606060606060606
+startend:end_checker 0.0
+startend:quotation 0.0
+Generating loose...
+Accuracy: 0.3234750462107209
+Generated: /home/nperez/Development/google-research/results/seed0/es/llama-3.1-8b-merge-eu/loose.jsonl
+================================================================
+/home/nperez/Development/google-research/results/seed0/es/llama-3.1-8b-merge-eu/loose.jsonl Accuracy Scores:
+prompt-level: 0.3234750462107209
+instruction-level: 0.43212951432129515
+
+change_case 0.15730337078651685
+combination 0.49230769230769234
+detectable_content 0.7358490566037735
+detectable_format 0.6242038216560509
+keywords 0.6012269938650306
+length_constraints 0.35664335664335667
+punctuation 0.12121212121212122
+startend 0.1044776119402985
+
+change_case:capital_word_frequency 0.48
+change_case:english_capital 0.08
+change_case:english_lowercase 0.0
+combination:repeat_prompt 0.5365853658536586
+combination:two_responses 0.4166666666666667
+detectable_content:number_placeholders 0.5925925925925926
+detectable_content:postscript 0.8846153846153846
+detectable_format:constrained_response 1.0
+detectable_format:json_format 0.0
+detectable_format:multiple_sections 0.7857142857142857
+detectable_format:number_bullet_lists 0.16129032258064516
+detectable_format:number_highlighted_sections 0.7708333333333334
+detectable_format:title 0.9459459459459459
+keywords:existence 0.7435897435897436
+keywords:forbidden_words 0.42857142857142855
+keywords:frequency 0.6428571428571429
+keywords:letter_frequency 0.6363636363636364
+length_constraints:nth_paragraph_first_word 0.0
+length_constraints:number_paragraphs 0.37037037037037035
+length_constraints:number_sentences 0.36538461538461536
+length_constraints:number_words 0.4230769230769231
+punctuation:no_comma 0.12121212121212122
+startend:end_checker 0.038461538461538464
+startend:quotation 0.14634146341463414

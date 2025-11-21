@@ -1,0 +1,82 @@
+Generating strict...
+Accuracy: 0.27171903881700554
+Generated: /home/nperez/Development/google-research/results/seed1/ca/qwen3-14b-merge-multi-eu30-gl15-ca5-ins50/strict.jsonl
+================================================================
+/home/nperez/Development/google-research/results/seed1/ca/qwen3-14b-merge-multi-eu30-gl15-ca5-ins50/strict.jsonl Accuracy Scores:
+prompt-level: 0.27171903881700554
+instruction-level: 0.37858032378580325
+
+change_case 0.2247191011235955
+combination 0.1076923076923077
+detectable_content 0.8113207547169812
+detectable_format 0.5923566878980892
+keywords 0.5337423312883436
+length_constraints 0.32867132867132864
+punctuation 0.07575757575757576
+startend 0.029850746268656716
+
+change_case:capital_word_frequency 0.8
+change_case:english_capital 0.0
+change_case:english_lowercase 0.0
+combination:repeat_prompt 0.0
+combination:two_responses 0.2916666666666667
+detectable_content:number_placeholders 0.8148148148148148
+detectable_content:postscript 0.8076923076923077
+detectable_format:constrained_response 0.9
+detectable_format:json_format 0.0
+detectable_format:multiple_sections 0.5714285714285714
+detectable_format:number_bullet_lists 0.2903225806451613
+detectable_format:number_highlighted_sections 0.7083333333333334
+detectable_format:title 0.8918918918918919
+keywords:existence 0.8461538461538461
+keywords:forbidden_words 0.20408163265306123
+keywords:frequency 0.5952380952380952
+keywords:letter_frequency 0.5757575757575758
+length_constraints:nth_paragraph_first_word 0.08333333333333333
+length_constraints:number_paragraphs 0.3333333333333333
+length_constraints:number_sentences 0.34615384615384615
+length_constraints:number_words 0.36538461538461536
+punctuation:no_comma 0.07575757575757576
+startend:end_checker 0.07692307692307693
+startend:quotation 0.0
+Generating loose...
+Accuracy: 0.3123844731977819
+Generated: /home/nperez/Development/google-research/results/seed1/ca/qwen3-14b-merge-multi-eu30-gl15-ca5-ins50/loose.jsonl
+================================================================
+/home/nperez/Development/google-research/results/seed1/ca/qwen3-14b-merge-multi-eu30-gl15-ca5-ins50/loose.jsonl Accuracy Scores:
+prompt-level: 0.3123844731977819
+instruction-level: 0.41967621419676215
+
+change_case 0.2247191011235955
+combination 0.27692307692307694
+detectable_content 0.8113207547169812
+detectable_format 0.6242038216560509
+keywords 0.5705521472392638
+length_constraints 0.3916083916083916
+punctuation 0.09090909090909091
+startend 0.04477611940298507
+
+change_case:capital_word_frequency 0.8
+change_case:english_capital 0.0
+change_case:english_lowercase 0.0
+combination:repeat_prompt 0.2682926829268293
+combination:two_responses 0.2916666666666667
+detectable_content:number_placeholders 0.8148148148148148
+detectable_content:postscript 0.8076923076923077
+detectable_format:constrained_response 0.9
+detectable_format:json_format 0.11764705882352941
+detectable_format:multiple_sections 0.5714285714285714
+detectable_format:number_bullet_lists 0.3870967741935484
+detectable_format:number_highlighted_sections 0.7083333333333334
+detectable_format:title 0.8918918918918919
+keywords:existence 0.8461538461538461
+keywords:forbidden_words 0.2857142857142857
+keywords:frequency 0.5952380952380952
+keywords:letter_frequency 0.6363636363636364
+length_constraints:nth_paragraph_first_word 0.16666666666666666
+length_constraints:number_paragraphs 0.37037037037037035
+length_constraints:number_sentences 0.40384615384615385
+length_constraints:number_words 0.4423076923076923
+punctuation:no_comma 0.09090909090909091
+startend:end_checker 0.11538461538461539
+startend:quotation 0.0

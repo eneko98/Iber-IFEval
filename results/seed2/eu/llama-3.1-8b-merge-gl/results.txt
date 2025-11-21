@@ -1,0 +1,82 @@
+Generating strict...
+Accuracy: 0.22735674676524953
+Generated: /home/nperez/Development/google-research/results/seed2/eu/llama-3.1-8b-merge-gl/strict.jsonl
+================================================================
+/home/nperez/Development/google-research/results/seed2/eu/llama-3.1-8b-merge-gl/strict.jsonl Accuracy Scores:
+prompt-level: 0.22735674676524953
+instruction-level: 0.3038605230386052
+
+change_case 0.10112359550561797
+combination 0.23076923076923078
+detectable_content 0.3584905660377358
+detectable_format 0.3057324840764331
+keywords 0.5214723926380368
+length_constraints 0.32167832167832167
+punctuation 0.15151515151515152
+startend 0.1791044776119403
+
+change_case:capital_word_frequency 0.36
+change_case:english_capital 0.0
+change_case:english_lowercase 0.0
+combination:repeat_prompt 0.2682926829268293
+combination:two_responses 0.16666666666666666
+detectable_content:number_placeholders 0.2222222222222222
+detectable_content:postscript 0.5
+detectable_format:constrained_response 1.0
+detectable_format:json_format 0.35294117647058826
+detectable_format:multiple_sections 0.07142857142857142
+detectable_format:number_bullet_lists 0.22580645161290322
+detectable_format:number_highlighted_sections 0.22916666666666666
+detectable_format:title 0.35135135135135137
+keywords:existence 0.5641025641025641
+keywords:forbidden_words 0.5510204081632653
+keywords:frequency 0.4523809523809524
+keywords:letter_frequency 0.5151515151515151
+length_constraints:nth_paragraph_first_word 0.0
+length_constraints:number_paragraphs 0.1111111111111111
+length_constraints:number_sentences 0.5
+length_constraints:number_words 0.3269230769230769
+punctuation:no_comma 0.15151515151515152
+startend:end_checker 0.3076923076923077
+startend:quotation 0.0975609756097561
+Generating loose...
+Accuracy: 0.24399260628465805
+Generated: /home/nperez/Development/google-research/results/seed2/eu/llama-3.1-8b-merge-gl/loose.jsonl
+================================================================
+/home/nperez/Development/google-research/results/seed2/eu/llama-3.1-8b-merge-gl/loose.jsonl Accuracy Scores:
+prompt-level: 0.24399260628465805
+instruction-level: 0.32627646326276466
+
+change_case 0.10112359550561797
+combination 0.26153846153846155
+detectable_content 0.3584905660377358
+detectable_format 0.3184713375796178
+keywords 0.558282208588957
+length_constraints 0.34965034965034963
+punctuation 0.21212121212121213
+startend 0.1791044776119403
+
+change_case:capital_word_frequency 0.36
+change_case:english_capital 0.0
+change_case:english_lowercase 0.0
+combination:repeat_prompt 0.2682926829268293
+combination:two_responses 0.25
+detectable_content:number_placeholders 0.2222222222222222
+detectable_content:postscript 0.5
+detectable_format:constrained_response 1.0
+detectable_format:json_format 0.4117647058823529
+detectable_format:multiple_sections 0.07142857142857142
+detectable_format:number_bullet_lists 0.25806451612903225
+detectable_format:number_highlighted_sections 0.22916666666666666
+detectable_format:title 0.35135135135135137
+keywords:existence 0.5641025641025641
+keywords:forbidden_words 0.6326530612244898
+keywords:frequency 0.47619047619047616
+keywords:letter_frequency 0.5454545454545454
+length_constraints:nth_paragraph_first_word 0.0
+length_constraints:number_paragraphs 0.2222222222222222
+length_constraints:number_sentences 0.5192307692307693
+length_constraints:number_words 0.3269230769230769
+punctuation:no_comma 0.21212121212121213
+startend:end_checker 0.3076923076923077
+startend:quotation 0.0975609756097561

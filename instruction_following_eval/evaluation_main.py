@@ -16,7 +16,6 @@
 """Binary of evaluating instruction following. See README.md."""
 
 import os
-from typing import Sequence
 
 from absl import app
 from absl import flags
@@ -57,7 +56,8 @@ def main(argv):
     logging.info("Generating %s...", output_file_name)
     outputs = []
     for inp in inputs:
-      outputs.append(func(inp, prompt_to_response))
+      if inp.prompt in prompt_to_response:
+        outputs.append(func(inp, prompt_to_response))
     follow_all_instructions = [o.follow_all_instructions for o in outputs]
     accuracy = sum(follow_all_instructions) / len(outputs)
     logging.info("Accuracy: %f", accuracy)

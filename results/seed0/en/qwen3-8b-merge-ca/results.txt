@@ -1,0 +1,82 @@
+Generating strict...
+Accuracy: 0.2759259259259259
+Generated: /home/nperez/Development/google-research/results/seed0/en/qwen3-8b-merge-ca/strict.jsonl
+================================================================
+/home/nperez/Development/google-research/results/seed0/en/qwen3-8b-merge-ca/strict.jsonl Accuracy Scores:
+prompt-level: 0.2759259259259259
+instruction-level: 0.40074906367041196
+
+change_case 0.20224719101123595
+combination 0.13846153846153847
+detectable_content 0.9038461538461539
+detectable_format 0.6410256410256411
+keywords 0.5644171779141104
+length_constraints 0.3356643356643357
+punctuation 0.0
+startend 0.1044776119402985
+
+change_case:capital_word_frequency 0.72
+change_case:english_capital 0.0
+change_case:english_lowercase 0.0
+combination:repeat_prompt 0.0
+combination:two_responses 0.375
+detectable_content:number_placeholders 0.9230769230769231
+detectable_content:postscript 0.8846153846153846
+detectable_format:constrained_response 1.0
+detectable_format:json_format 0.0
+detectable_format:multiple_sections 1.0
+detectable_format:number_bullet_lists 0.1935483870967742
+detectable_format:number_highlighted_sections 0.8085106382978723
+detectable_format:title 0.8648648648648649
+keywords:existence 1.0
+keywords:forbidden_words 0.0
+keywords:frequency 0.7619047619047619
+keywords:letter_frequency 0.6363636363636364
+length_constraints:nth_paragraph_first_word 0.0
+length_constraints:number_paragraphs 0.25925925925925924
+length_constraints:number_sentences 0.34615384615384615
+length_constraints:number_words 0.4423076923076923
+punctuation:no_comma 0.0
+startend:end_checker 0.2692307692307692
+startend:quotation 0.0
+Generating loose...
+Accuracy: 0.28703703703703703
+Generated: /home/nperez/Development/google-research/results/seed0/en/qwen3-8b-merge-ca/loose.jsonl
+================================================================
+/home/nperez/Development/google-research/results/seed0/en/qwen3-8b-merge-ca/loose.jsonl Accuracy Scores:
+prompt-level: 0.28703703703703703
+instruction-level: 0.4107365792759051
+
+change_case 0.21348314606741572
+combination 0.15384615384615385
+detectable_content 0.9038461538461539
+detectable_format 0.6474358974358975
+keywords 0.5705521472392638
+length_constraints 0.35664335664335667
+punctuation 0.0
+startend 0.11940298507462686
+
+change_case:capital_word_frequency 0.76
+change_case:english_capital 0.0
+change_case:english_lowercase 0.0
+combination:repeat_prompt 0.0
+combination:two_responses 0.4166666666666667
+detectable_content:number_placeholders 0.9230769230769231
+detectable_content:postscript 0.8846153846153846
+detectable_format:constrained_response 1.0
+detectable_format:json_format 0.0
+detectable_format:multiple_sections 1.0
+detectable_format:number_bullet_lists 0.22580645161290322
+detectable_format:number_highlighted_sections 0.8085106382978723
+detectable_format:title 0.8648648648648649
+keywords:existence 1.0
+keywords:forbidden_words 0.0
+keywords:frequency 0.7619047619047619
+keywords:letter_frequency 0.6666666666666666
+length_constraints:nth_paragraph_first_word 0.0
+length_constraints:number_paragraphs 0.2962962962962963
+length_constraints:number_sentences 0.38461538461538464
+length_constraints:number_words 0.4423076923076923
+punctuation:no_comma 0.0
+startend:end_checker 0.3076923076923077
+startend:quotation 0.0

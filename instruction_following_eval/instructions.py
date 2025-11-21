@@ -22,7 +22,7 @@ import string
 from typing import Dict, Optional, Sequence, Union
 
 from absl import logging
-import langdetect
+from ftlangdetect import detect
 
 from instruction_following_eval import instructions_util
 
@@ -155,8 +155,8 @@ class ResponseLanguageChecker(Instruction):
     assert isinstance(value, str)
 
     try:
-      return langdetect.detect(value) == self._language
-    except langdetect.LangDetectException as e:
+      return detect(value.replace("\n", ""))["lang"] == self._language
+    except Exception as e:
       # Count as instruction is followed.
       logging.error(
           "Unable to detect language for text %s due to %s", value, e
@@ -1413,8 +1413,8 @@ class CapitalLettersEnglishChecker(Instruction):
     assert isinstance(value, str)
 
     try:
-      return value.isupper() and langdetect.detect(value) == "en"
-    except langdetect.LangDetectException as e:
+      return value.isupper() and detect(value.replace("\n", ""))["lang"] == "en"
+    except Exception as e:
       # Count as instruction is followed.
       logging.error(
           "Unable to detect language for text %s due to %s", value, e
@@ -1445,8 +1445,8 @@ class LowercaseLettersEnglishChecker(Instruction):
     assert isinstance(value, str)
 
     try:
-      return value.islower() and langdetect.detect(value) == "en"
-    except langdetect.LangDetectException as e:
+      return value.islower() and detect(value.replace("\n", ""))["lang"] == "en"
+    except Exception as e:
       # Count as instruction is followed.
       logging.error(
           "Unable to detect language for text %s due to %s", value, e

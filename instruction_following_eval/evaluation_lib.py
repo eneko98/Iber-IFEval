@@ -18,7 +18,8 @@
 import collections
 import dataclasses
 import json
-from typing import Dict, Optional, Sequence, Union
+import os
+from typing import Dict, Optional, Union
 
 from instruction_following_eval import instructions_registry
 
@@ -46,17 +47,21 @@ def read_prompt_list(input_jsonl_filename):
   with open(input_jsonl_filename, "r") as f:
     for l in f:
       example = json.loads(l)
-      inputs.append(
+      try:
+        inputs.append(
           InputExample(key=example["key"],
                        instruction_id_list=example["instruction_id_list"],
                        prompt=example["prompt"],
                        kwargs=example["kwargs"]))
+      except Exception as e:
+          print(e)
   return inputs
 
 
 def write_outputs(output_jsonl_filename, outputs):
   """Writes outputs to jsonl."""
   assert outputs
+  os.makedirs(os.path.dirname(output_jsonl_filename), exist_ok=True)
   with open(output_jsonl_filename, "w") as f:
     for o in outputs:
       f.write(
@@ -75,14 +80,18 @@ def write_outputs(output_jsonl_filename, outputs):
 def test_instruction_following_strict(
     inp,
     prompt_to_response,
+    language
 ):
   """Tests response to see if instrutions are followed."""
   response = prompt_to_response[inp.prompt]
-  instruction_list = inp.instruction_id_list
+  instruction_list = []
   is_following_list = []
 
-  for index, instruction_id in enumerate(instruction_list):
-    instruction_cls = instructions_registry.INSTRUCTION_DICT[instruction_id]
+  instruction_dict = instructions_registry.instruction_dict(language)
+  for index, instruction_id in enumerate(inp.instruction_id_list):
+    if instruction_id not in instruction_dict:
+      continue
+    instruction_cls = instruction_dict[instruction_id]
     instruction = instruction_cls(instruction_id)
 
     instruction.build_description(**inp.kwargs[index])
@@ -94,19 +103,21 @@ def test_instruction_following_strict(
       is_following_list.append(True)
     else:
       is_following_list.append(False)
+    instruction_list.append(instruction_id)
 
   return OutputExample(
-      instruction_id_list=inp.instruction_id_list,
-      prompt=inp.prompt,
-      response=response,
-      follow_all_instructions=all(is_following_list),
-      follow_instruction_list=is_following_list,
+    instruction_id_list=instruction_list,
+    prompt=inp.prompt,
+    response=response,
+    follow_all_instructions=all(is_following_list),
+    follow_instruction_list=is_following_list,
   )
 
 
 def test_instruction_following_loose(
     inp,
     prompt_to_response,
+    language
 ):
   """Tests response for an upper bound for following instructions."""
   response = prompt_to_response[inp.prompt]
@@ -119,20 +130,23 @@ def test_instruction_following_loose(
   revised_response_remove_last = response_remove_last.replace("*", "")
   revised_response_remove_both = response_remove_both.replace("*", "")
   all_responses = [
-      response,
-      revised_response,
-      response_remove_first,
-      response_remove_last,
-      response_remove_both,
-      revised_response_remove_first,
-      revised_response_remove_last,
-      revised_response_remove_both,
+    response,
+    revised_response,
+    response_remove_first,
+    response_remove_last,
+    response_remove_both,
+    revised_response_remove_first,
+    revised_response_remove_last,
+    revised_response_remove_both,
   ]
-  instruction_list = inp.instruction_id_list
+  instruction_list = []
   is_following_list = []
 
-  for index, instruction_id in enumerate(instruction_list):
-    instruction_cls = instructions_registry.INSTRUCTION_DICT[instruction_id]
+  instruction_dict = instructions_registry.instruction_dict(language)
+  for index, instruction_id in enumerate(inp.instruction_id_list):
+    if instruction_id not in instruction_dict:
+      continue
+    instruction_cls = instruction_dict[instruction_id]
     instruction = instruction_cls(instruction_id)
 
     instruction.build_description(**inp.kwargs[index])
@@ -147,13 +161,14 @@ def test_instruction_following_loose(
         break
 
     is_following_list.append(is_following)
+    instruction_list.append(instruction_id)
 
   return OutputExample(
-      instruction_id_list=inp.instruction_id_list,
-      prompt=inp.prompt,
-      response=response,
-      follow_all_instructions=all(is_following_list),
-      follow_instruction_list=is_following_list,
+    instruction_id_list=instruction_list,
+    prompt=inp.prompt,
+    response=response,
+    follow_all_instructions=all(is_following_list),
+    follow_instruction_list=is_following_list,
   )
 
 
@@ -167,7 +182,7 @@ def read_prompt_to_response_dict(input_jsonl_filename):
   return return_dict
 
 
-def print_report(outputs):
+def print_report(outputs, log_file):
   """Prints a report on accuracy scores."""
 
   prompt_total = 0
@@ -207,14 +222,16 @@ def print_report(outputs):
       if followed_or_not:
         tier1_correct[instruction_id] += 1
 
-  print(f"prompt-level: {prompt_correct / prompt_total}")
-  print(f"instruction-level: {instruction_correct / instruction_total}")
-  print()
+  prompt_level = prompt_correct / prompt_total
+  print(f"prompt-level: {prompt_level}", file=log_file)
+  instruction_level = instruction_correct / instruction_total
+  print(f"instruction-level: {instruction_level}", file=log_file)
+  print("", file=log_file)
   for instruction_id in sorted(tier0_total.keys()):
     accuracy = tier0_correct[instruction_id] / tier0_total[instruction_id]
-    print(f"{instruction_id} {accuracy}")
-  print()
+    print(f"{instruction_id} {accuracy}", file=log_file)
+  print("", file=log_file)
   for instruction_id in sorted(tier1_total.keys()):
     accuracy = tier1_correct[instruction_id] / tier1_total[instruction_id]
-    print(f"{instruction_id} {accuracy}")
-
+    print(f"{instruction_id} {accuracy}", file=log_file)
+  return prompt_level, instruction_level

@@ -1,0 +1,82 @@
+Generating strict...
+Accuracy: 0.2199630314232902
+Generated: /home/nperez/Development/google-research/results/seed1/es/qwen3-8b-ca/strict.jsonl
+================================================================
+/home/nperez/Development/google-research/results/seed1/es/qwen3-8b-ca/strict.jsonl Accuracy Scores:
+prompt-level: 0.2199630314232902
+instruction-level: 0.30635118306351183
+
+change_case 0.14606741573033707
+combination 0.24615384615384617
+detectable_content 0.5849056603773585
+detectable_format 0.2611464968152866
+keywords 0.4171779141104294
+length_constraints 0.3706293706293706
+punctuation 0.24242424242424243
+startend 0.11940298507462686
+
+change_case:capital_word_frequency 0.44
+change_case:english_capital 0.08
+change_case:english_lowercase 0.0
+combination:repeat_prompt 0.21951219512195122
+combination:two_responses 0.2916666666666667
+detectable_content:number_placeholders 0.4074074074074074
+detectable_content:postscript 0.7692307692307693
+detectable_format:constrained_response 0.4
+detectable_format:json_format 0.11764705882352941
+detectable_format:multiple_sections 0.35714285714285715
+detectable_format:number_bullet_lists 0.22580645161290322
+detectable_format:number_highlighted_sections 0.1875
+detectable_format:title 0.3783783783783784
+keywords:existence 0.5384615384615384
+keywords:forbidden_words 0.3673469387755102
+keywords:frequency 0.38095238095238093
+keywords:letter_frequency 0.3939393939393939
+length_constraints:nth_paragraph_first_word 0.0
+length_constraints:number_paragraphs 0.25925925925925924
+length_constraints:number_sentences 0.4807692307692308
+length_constraints:number_words 0.40384615384615385
+punctuation:no_comma 0.24242424242424243
+startend:end_checker 0.19230769230769232
+startend:quotation 0.07317073170731707
+Generating loose...
+Accuracy: 0.2532347504621072
+Generated: /home/nperez/Development/google-research/results/seed1/es/qwen3-8b-ca/loose.jsonl
+================================================================
+/home/nperez/Development/google-research/results/seed1/es/qwen3-8b-ca/loose.jsonl Accuracy Scores:
+prompt-level: 0.2532347504621072
+instruction-level: 0.33374844333748444
+
+change_case 0.14606741573033707
+combination 0.26153846153846155
+detectable_content 0.5849056603773585
+detectable_format 0.27388535031847133
+keywords 0.4539877300613497
+length_constraints 0.3916083916083916
+punctuation 0.36363636363636365
+startend 0.14925373134328357
+
+change_case:capital_word_frequency 0.44
+change_case:english_capital 0.08
+change_case:english_lowercase 0.0
+combination:repeat_prompt 0.24390243902439024
+combination:two_responses 0.2916666666666667
+detectable_content:number_placeholders 0.4074074074074074
+detectable_content:postscript 0.7692307692307693
+detectable_format:constrained_response 0.4
+detectable_format:json_format 0.23529411764705882
+detectable_format:multiple_sections 0.35714285714285715
+detectable_format:number_bullet_lists 0.22580645161290322
+detectable_format:number_highlighted_sections 0.1875
+detectable_format:title 0.3783783783783784
+keywords:existence 0.5384615384615384
+keywords:forbidden_words 0.4897959183673469
+keywords:frequency 0.40476190476190477
+keywords:letter_frequency 0.36363636363636365
+length_constraints:nth_paragraph_first_word 0.0
+length_constraints:number_paragraphs 0.25925925925925924
+length_constraints:number_sentences 0.5192307692307693
+length_constraints:number_words 0.4230769230769231
+punctuation:no_comma 0.36363636363636365
+startend:end_checker 0.23076923076923078
+startend:quotation 0.0975609756097561

@@ -1,0 +1,82 @@
+Generating strict...
+Accuracy: 0.30185185185185187
+Generated: /home/nperez/Development/google-research/results/seed0/en/qwen3-14b-merge-eu/strict.jsonl
+================================================================
+/home/nperez/Development/google-research/results/seed0/en/qwen3-14b-merge-eu/strict.jsonl Accuracy Scores:
+prompt-level: 0.30185185185185187
+instruction-level: 0.42946317103620474
+
+change_case 0.23595505617977527
+combination 0.16923076923076924
+detectable_content 0.8846153846153846
+detectable_format 0.6730769230769231
+keywords 0.5766871165644172
+length_constraints 0.34265734265734266
+punctuation 0.12121212121212122
+startend 0.14925373134328357
+
+change_case:capital_word_frequency 0.72
+change_case:english_capital 0.04
+change_case:english_lowercase 0.05128205128205128
+combination:repeat_prompt 0.0
+combination:two_responses 0.4583333333333333
+detectable_content:number_placeholders 0.9230769230769231
+detectable_content:postscript 0.8461538461538461
+detectable_format:constrained_response 1.0
+detectable_format:json_format 0.0
+detectable_format:multiple_sections 0.7857142857142857
+detectable_format:number_bullet_lists 0.3870967741935484
+detectable_format:number_highlighted_sections 0.7872340425531915
+detectable_format:title 0.9459459459459459
+keywords:existence 1.0
+keywords:forbidden_words 0.04081632653061224
+keywords:frequency 0.7380952380952381
+keywords:letter_frequency 0.6666666666666666
+length_constraints:nth_paragraph_first_word 0.0
+length_constraints:number_paragraphs 0.37037037037037035
+length_constraints:number_sentences 0.3076923076923077
+length_constraints:number_words 0.4423076923076923
+punctuation:no_comma 0.12121212121212122
+startend:end_checker 0.38461538461538464
+startend:quotation 0.0
+Generating loose...
+Accuracy: 0.31296296296296294
+Generated: /home/nperez/Development/google-research/results/seed0/en/qwen3-14b-merge-eu/loose.jsonl
+================================================================
+/home/nperez/Development/google-research/results/seed0/en/qwen3-14b-merge-eu/loose.jsonl Accuracy Scores:
+prompt-level: 0.31296296296296294
+instruction-level: 0.4431960049937578
+
+change_case 0.24719101123595505
+combination 0.23076923076923078
+detectable_content 0.8846153846153846
+detectable_format 0.6794871794871795
+keywords 0.5766871165644172
+length_constraints 0.3776223776223776
+punctuation 0.12121212121212122
+startend 0.14925373134328357
+
+change_case:capital_word_frequency 0.76
+change_case:english_capital 0.04
+change_case:english_lowercase 0.05128205128205128
+combination:repeat_prompt 0.024390243902439025
+combination:two_responses 0.5833333333333334
+detectable_content:number_placeholders 0.9230769230769231
+detectable_content:postscript 0.8461538461538461
+detectable_format:constrained_response 1.0
+detectable_format:json_format 0.0
+detectable_format:multiple_sections 0.7857142857142857
+detectable_format:number_bullet_lists 0.41935483870967744
+detectable_format:number_highlighted_sections 0.7872340425531915
+detectable_format:title 0.9459459459459459
+keywords:existence 1.0
+keywords:forbidden_words 0.04081632653061224
+keywords:frequency 0.7380952380952381
+keywords:letter_frequency 0.6666666666666666
+length_constraints:nth_paragraph_first_word 0.0
+length_constraints:number_paragraphs 0.4074074074074074
+length_constraints:number_sentences 0.38461538461538464
+length_constraints:number_words 0.4423076923076923
+punctuation:no_comma 0.12121212121212122
+startend:end_checker 0.38461538461538464
+startend:quotation 0.0

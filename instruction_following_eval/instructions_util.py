@@ -17,8 +17,7 @@
 
 import functools
 import random
-import re
-from typing import List
+import regex as re
 
 import immutabledict
 import nltk
@@ -28,7 +27,9 @@ WORD_LIST = ["western", "sentence", "signal", "dump", "spot", "opposite", "botto
 # ISO 639-1 codes to language names.
 LANGUAGE_CODES = immutabledict.immutabledict({
     "en": "English",
+    "eu": "Basque",
     "es": "Spanish",
+    "ca": "Catalan",
     "pt": "Portuguese",
     "ar": "Arabic",
     "hi": "Hindi",
@@ -59,7 +60,7 @@ LANGUAGE_CODES = immutabledict.immutabledict({
     "fi": "Finnish",
     })
 
-_ALPHABETS = "([A-Za-z])"
+_ALPHABETS = r"(\p{L})"
 _PREFIXES = "(Mr|St|Mrs|Ms|Dr)[.]"
 _SUFFIXES = "(Inc|Ltd|Jr|Sr|Co)"
 _STARTERS = r"(Mr|Mrs|Ms|Dr|Prof|Capt|Cpt|Lt|He\s|She\s|It\s|They\s|Their\s|Our\s|We\s|But\s|However\s|That\s|This\s|Wherever)"
