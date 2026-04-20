@@ -77,6 +77,26 @@ The runner is currently configured for these languages:
 - `eu` — Basque
 - `gl` — Galician
 
+## Required input datasets
+
+To run IFEval, you need prompt data for each language in JSONL format.
+
+The datasets currently used are:
+
+- **English**: `google/IFEval`
+- **Spanish**: `BSC-LT/IFEval_es`
+- **Catalan**: `projecte-aina/IFEval_ca`
+- **Basque**: created by us, available in the HiTZ collection
+- **Galician**: created by us, available in the HiTZ collection
+
+Basque and Galician can be downloaded from this Hugging Face collection:
+
+<https://huggingface.co/collections/HiTZ/merge-and-conquer>
+
+All JSONL files can be downloaded from their corresponding repositories or collections on Hugging Face.
+
+This step is required: if the input files are not available in the expected paths, the runner will skip that language and the evaluation will not run.
+
 ## Expected prompt input structure
 
 Prompt files are expected under:
@@ -90,6 +110,16 @@ Example:
 ```bash
 /scratch/evalero/inference/inputs/en/input_data.en.jsonl
 /scratch/evalero/inference/inputs/es/input_data.es.jsonl
+```
+
+After downloading the datasets, the input files should be placed following that structure. For example:
+
+```bash
+/scratch/evalero/inference/inputs/en/input_data.en.jsonl
+/scratch/evalero/inference/inputs/es/input_data.es.jsonl
+/scratch/evalero/inference/inputs/ca/input_data.ca.jsonl
+/scratch/evalero/inference/inputs/eu/input_data.eu.jsonl
+/scratch/evalero/inference/inputs/gl/input_data.gl.jsonl
 ```
 
 ## Expected response structure
