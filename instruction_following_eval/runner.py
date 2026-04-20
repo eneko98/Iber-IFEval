@@ -7,117 +7,167 @@ from instruction_following_eval import evaluation_lib
 
 
 def run_and_parse(language, input_data, input_response, output_dir, log_file):
-
     inputs = evaluation_lib.read_prompt_list(input_data)
     prompt_to_response = evaluation_lib.read_prompt_to_response_dict(input_response)
 
-    results = defaultdict(dict)
-    for func, output_file_name_id in [
-        (evaluation_lib.test_instruction_following_strict, 'strict'),
-        (evaluation_lib.test_instruction_following_loose, 'loose'),
+    results = {}
+
+    for func, name in [
+        (evaluation_lib.test_instruction_following_strict, "strict"),
+        (evaluation_lib.test_instruction_following_loose, "loose"),
     ]:
-        print(f'Generating {output_file_name_id}...', file=log_file)
+        print(f"Generating {name}...", file=log_file)
+
         outputs = []
         for inp in inputs:
             if inp.prompt in prompt_to_response:
                 outputs.append(func(inp, prompt_to_response, language))
-        follow_all_instructions = [o.follow_all_instructions for o in outputs]
-        accuracy = sum(follow_all_instructions) / len(outputs)
-        print(f'Accuracy: {accuracy}', file=log_file)
 
-        output_file_name = output_dir / f'{output_file_name_id}.jsonl'
-        evaluation_lib.write_outputs(output_file_name, outputs)
-        print(f'Generated: {output_file_name}', file=log_file)
+        follow_all = [o.follow_all_instructions for o in outputs]
+        accuracy = sum(follow_all) / len(follow_all) if outputs else 0.0
+        print(f"Accuracy: {accuracy}", file=log_file)
 
-        print('=' * 64, file=log_file)
-        print(f'{output_file_name} Accuracy Scores:', file=log_file)
+        out_path = output_dir / f"{name}.jsonl"
+        evaluation_lib.write_outputs(out_path, outputs)
+        print(f"Generated: {out_path}", file=log_file)
+
         prompt_level, instruction_level = evaluation_lib.print_report(outputs, log_file)
-        results[output_file_name_id]['prompt'] = prompt_level
-        results[output_file_name_id]['instruction'] = instruction_level
+        results[name] = {
+            "prompt": prompt_level,
+            "instruction": instruction_level,
+        }
+
+        print("=" * 64, file=log_file)
 
     return results
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
 
-    LANGS = ['en', 'es', 'ca', 'eu']
-    DATA_DIR = Path(__file__).parent.parent / 'data'
-    OUTPUT_DIR = Path(__file__).parent.parent / 'outputs'
-    RESULTS_DIR = Path(__file__).parent.parent / 'results'
+    BASE_INPUTS = Path("/scratch/evalero/inference/inputs")
+    BASE_OUTPUTS = Path("/scratch/evalero/inference/outputs")
+    BASE_RESULTS = Path("/scratch/evalero/ifeval_results")
 
-    SYSTEM_ORDER = [
-        'llama-3.1-8b-joint-eu',
-        'llama-3.1-8b-instruct',
-        'llama-3.1-8b-merge-eu',
-        'llama-3.1-8b-merge-gl',
-        'llama-3.1-8b-merge-ca',
-        'llama-3.1-8b-merge-es',
-        'llama-3.1-8b-merge-multi-eu30-gl15-ca5-ins50',
-        'qwen3-8b-instruct',
-        'qwen3-8b-merge-eu',
-        'qwen3-8b-merge-gl',
-        'qwen3-8b-merge-ca',
-        'qwen3-8b-merge-es',
-        'qwen3-8b-merge-multi-eu30-gl15-ca5-ins50',
-        'qwen3-14b-instruct',
-        'qwen3-14b-merge-eu',
-        'qwen3-14b-merge-gl',
-        'qwen3-14b-merge-ca',
-        'qwen3-14b-merge-es',
-        'qwen3-14b-merge-multi-eu30-gl15-ca5-ins50',
-    ]
+    LANGS = ["en", "es", "ca", "eu", "gl"]
+
+    EXPERIMENTS = {
+        "main": {
+            "seeds": ["seed21", "seed22", "seed23"],
+            "modes": ["merge", "original"],
+            "output_root": lambda lang, mode: BASE_RESULTS / lang / mode,
+        },
+        # "ablation": {
+        #     "seeds": ["seed3", "seed4", "seed5"],
+        #     "modes": ["merge"],
+        #     "output_root": lambda lang, mode: BASE_RESULTS / lang / "ablation",
+        # },
+    }
 
     for lang in LANGS:
+        print(f"=== Evaluating language: {lang} ===")
 
-        results = defaultdict(dict)
+        input_data = BASE_INPUTS / lang / f"input_data.{lang}.jsonl"
+        if not input_data.exists():
+            print(f"Missing input file for {lang}, skipping.")
+            continue
 
-        for run in ['seed0', 'seed1', 'seed2']:
+        for exp_name, exp in EXPERIMENTS.items():
+            print(f"--- Experiment: {exp_name} ---")
 
-            print(f'=== Evaluating language: {lang} ===')
-            input_data = DATA_DIR / f'input_data.{lang}.jsonl'
-            lang_output_root = OUTPUT_DIR / run / lang
-            response_files = list(lang_output_root.rglob('*.jsonl'))
+            for mode in exp["modes"]:
+                aggregated = defaultdict(lambda: {"strict": [], "loose": []})
 
-            if not response_files:
-                print(f'(No response files found for {lang})')
-                continue
+                lang_results_root = exp["output_root"](lang, mode)
+                lang_results_root.mkdir(parents=True, exist_ok=True)
 
-            for resp_path in response_files:
-                system_name = resp_path.stem
+                for seed in exp["seeds"]:
+                    seed_output_root = BASE_OUTPUTS / seed / mode / lang
+                    if not seed_output_root.exists():
+                        print(f"Missing output root: {seed_output_root}, skipping.")
+                        continue
 
-                output_dir = RESULTS_DIR / run / lang / system_name
-                output_dir.mkdir(parents=True, exist_ok=True)
+                    seed_results_root = lang_results_root / seed
+                    seed_results_root.mkdir(parents=True, exist_ok=True)
 
-                print(f'Running evaluation for {system_name}')
-                log_file = (output_dir / 'results.txt').open('w')
-                result_dict = run_and_parse(lang, input_data, resp_path, output_dir, log_file)
-                log_file.close()
+                    for resp_path in seed_output_root.rglob("*.jsonl"):
+                        rel_parts = resp_path.relative_to(seed_output_root).parts
 
-                if not any(x in system_name for x in ['instruct', 'joint', 'merge']):
-                    continue
+                        # Expected structure:
+                        # <family>/<thinking_mode>/<file>.jsonl
+                        if len(rel_parts) < 3:
+                            print(f"Skipping unexpected path: {resp_path}")
+                            continue
 
-                if 'strict_instruction' not in results[system_name]:
-                    results[system_name]['strict_instruction'] = []
-                results[system_name]['strict_instruction'].append(result_dict['strict']['instruction'])
+                        family = rel_parts[0]
+                        thinking_mode = rel_parts[1]
+                        filename = resp_path.name
 
-                if 'loose_instruction' not in results[system_name]:
-                    results[system_name]['loose_instruction'] = []
-                results[system_name]['loose_instruction'].append(result_dict['loose']['instruction'])
+                        # with_thinking  -> only use *.cleaned.jsonl
+                        # without_thinking -> only use normal *.jsonl
+                        if thinking_mode == "with_thinking":
+                            if not filename.endswith(".cleaned.jsonl"):
+                                continue
+                            model_name = filename[:-len(".cleaned.jsonl")]
+                        elif thinking_mode == "without_thinking":
+                            if filename.endswith(".cleaned.jsonl"):
+                                continue
+                            model_name = resp_path.stem
+                        else:
+                            print(f"Skipping unknown thinking mode path: {resp_path}")
+                            continue
 
-        results = [{
-            'system': k,
-            'strict_instruction mean': statistics.mean(v['strict_instruction']),
-            'strict_instruction std': statistics.stdev(v['strict_instruction']),
-            'loose_instruction mean': statistics.mean(v['loose_instruction']),
-            'loose_instruction std': statistics.stdev(v['loose_instruction']),
-        } for k, v in results.items() ]
-        order_index = {name: i for i, name in enumerate(SYSTEM_ORDER)}
-        results.sort(key=lambda x: order_index.get(x['system'], len(SYSTEM_ORDER)))
+                        system_name = f"{family}/{thinking_mode}/{model_name}"
 
-        csv_path = f'eval_summary_{lang}.csv'
-        with open(csv_path, 'w', newline='') as wf:
-            writer = csv.DictWriter(wf, fieldnames=['system', 'strict_instruction mean', 'strict_instruction std', 'loose_instruction mean', 'loose_instruction std'])
-            writer.writeheader()
-            writer.writerows(results)
+                        model_out_dir = seed_results_root / family / thinking_mode / model_name
+                        model_out_dir.mkdir(parents=True, exist_ok=True)
 
-        print(f'Saved: {csv_path} ({len(results)} systems)')
+                        print(f"Running {exp_name} | {mode} | {lang} | {seed} | {system_name}")
+
+                        with (model_out_dir / "results.txt").open("w") as log_file:
+                            res = run_and_parse(
+                                lang,
+                                input_data,
+                                resp_path,
+                                model_out_dir,
+                                log_file,
+                            )
+
+                        aggregated[system_name]["strict"].append(
+                            res["strict"]["instruction"]
+                        )
+                        aggregated[system_name]["loose"].append(
+                            res["loose"]["instruction"]
+                        )
+
+                csv_path = lang_results_root / f"eval_summary_{lang}.csv"
+                with csv_path.open("w", newline="") as wf:
+                    writer = csv.DictWriter(
+                        wf,
+                        fieldnames=[
+                            "system",
+                            "strict_instruction_mean",
+                            "strict_instruction_std",
+                            "loose_instruction_mean",
+                            "loose_instruction_std",
+                        ],
+                    )
+                    writer.writeheader()
+
+                    for system, vals in aggregated.items():
+                        writer.writerow(
+                            {
+                                "system": system,
+                                "strict_instruction_mean": statistics.mean(vals["strict"]),
+                                "strict_instruction_std": (
+                                    statistics.stdev(vals["strict"])
+                                    if len(vals["strict"]) > 1 else 0.0
+                                ),
+                                "loose_instruction_mean": statistics.mean(vals["loose"]),
+                                "loose_instruction_std": (
+                                    statistics.stdev(vals["loose"])
+                                    if len(vals["loose"]) > 1 else 0.0
+                                ),
+                            }
+                        )
+
+                print(f"Saved: {csv_path}")
