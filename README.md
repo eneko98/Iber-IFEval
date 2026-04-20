@@ -1,6 +1,6 @@
 # Iber-IFEval
 
-A modified version of the original **IFEval** codebase, adapted for a multilingual evaluation workflow on a cluster environment.
+A modified version of the original **IFEval** codebase, adapted for a multilingual evaluation workflow.
 
 This repository is used to evaluate instruction-following performance across several languages, seeds, and experiment settings, and to aggregate results into summary CSV files.
 
